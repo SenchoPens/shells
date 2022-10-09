@@ -92,14 +92,18 @@
         }) (pkgs.mkShell {}) envs);
 
       in rec {
-        packages.jupyterlab = jupyterEnvironment;
-        defaultPackage = packages.jupyterlab;
-
-        apps.jupterlab = {
-          type = "app";
-          program = "${jupyterEnvironment}/bin/jupyter-lab";
+        packages = rec {
+          jupyterlab = jupyterEnvironment;
+          default = jupyterlab;
         };
-        defaultApp = apps.jupterlab;
+
+        apps = rec {
+          jupyterlab = {
+            type = "app";
+            program = "${jupyterEnvironment}/bin/jupyter-lab";
+          };
+          default = jupyterlab;
+        };
 
         devShell = mergeEnvs [ jupyterEnvironment.env latexShell ];
       }
