@@ -4,7 +4,7 @@
   inputs = {
       jupyterWith.url = "github:tweag/jupyterWith";
       flake-utils.url = "github:numtide/flake-utils";
-      nixpkgs.url = "github:NixOS/nixpkgs?ref=nixos-22.05";
+      nixpkgs.url = "github:NixOS/nixpkgs?ref=nixos-21.11";
   };
 
   outputs = { self, nixpkgs, jupyterWith, flake-utils }:
