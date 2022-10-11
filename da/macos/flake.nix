@@ -4,7 +4,7 @@
   inputs = {
       jupyterWith.url = "github:tweag/jupyterWith";
       flake-utils.url = "github:numtide/flake-utils";
-      nixpkgs.url = "github:NixOS/nixpkgs?ref=nixpkgs-unstable";
+      nixpkgs.url = "github:NixOS/nixpkgs?rev=5e47a07e9f2d7ed999f2c7943b0896f5f7321ca3";
   };
 
   outputs = { self, nixpkgs, jupyterWith, flake-utils }:
@@ -94,7 +94,7 @@
       in rec {
         packages = rec {
           jupyterlab = jupyterEnvironment;
-          default = jupyterlab;
+          # default = jupyterlab;
         };
 
         apps = rec {
@@ -106,6 +106,7 @@
         };
 
         devShell = mergeEnvs [ jupyterEnvironment.env latexShell ];
+        # devShell = mergeEnvs [ jupyterEnvironment.env ];
       }
     );
 }
