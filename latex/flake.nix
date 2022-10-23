@@ -11,18 +11,34 @@
     in {
       devShell = pkgs.mkShell {
         nativeBuildInputs = with pkgs; [ 
+          biber
           (texlive.combine { inherit (pkgs.texlive)
-            scheme-small collection-langcyrillic preprint invoice environ
-            collection-fontsrecommended collection-latexrecommended latexmk tcolorbox
-            titlesec
-            fontawesome yfonts bbm
+            bbm
+            beamer
+            biblatex
+            bussproofs  # for proof trees, see https://www.actual.world/resources/tex/doc/Proofs.pdf
+            collection-fontsrecommended
+            collection-langcyrillic
+            collection-latexrecommended
+            csquotes
+            environ
+            fontawesome
             gauss
+            invoice
+            latexmk
             listings
-            pgfornament pgfopts
+            pgfopts
+            pgfornament
             physics
-            bussproofs  # for proof trees, see www.actual.world/resources/tex/doc/Proofs.pdf
+            placeins
+            preprint
+            scheme-small
+            sidecap
+            tcolorbox
+            titlesec
             tkz-graph
-            biblatex csquotes sidecap placeins beamer
+            trimspaces
+            yfonts
             ;
           })
         ];
