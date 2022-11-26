@@ -47,7 +47,11 @@
 
             scipy
             scikit-learn
+            pytorch
+            torchvision
 
+            ipywidgets
+            tqdm
             networkx
             pydot
 
