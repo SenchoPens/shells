@@ -2,17 +2,23 @@
   description = "JupyterLab flake";
 
   inputs = {
-      jupyterWith.url = "github:tweag/jupyterWith";
+      jupyterWith.url = "github:tweag/jupyterWith/old";
       flake-utils.url = "github:numtide/flake-utils";
       nixpkgs.url = "github:NixOS/nixpkgs?rev=5e47a07e9f2d7ed999f2c7943b0896f5f7321ca3";
+      nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
   };
 
-  outputs = { self, nixpkgs, jupyterWith, flake-utils }:
+  outputs = { self, nixpkgs, jupyterWith, flake-utils, nixpkgs-unstable }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs {
           system = system;
           overlays = nixpkgs.lib.attrValues jupyterWith.overlays;
+          # config = { allowBroken = true; allowUnsupportedSystem = true; };
+        };
+
+        pkgs-unstable = import nixpkgs-unstable {
+          system = system;
         };
 
         latexBuild = p: (p.texlive.combine {
@@ -34,26 +40,36 @@
 
         iPython = pkgs.kernels.iPythonWith {
           name = "Python-env";
-          packages = p: with p; [
+          packages = p: with p;
+          let
+	      pytorch = callPackage ./pytorch {
+		      cudaSupport = false;
+		      inherit (pkgs.darwin.apple_sdk.frameworks) CoreServices;
+		      inherit (pkgs.darwin) libobjc;
+	      };
+              tqdm = callPackage ./tqdm.nix { };
+          in [
             numpy
 
             pandas
             openpyxl
             tabulate  # for .to_markdown()
 
+            (sentencepiece.override { inherit (pkgs-unstable) sentencepiece;})
             matplotlib
             seaborn
             folium  # map visualization
 
             scipy
             scikit-learn
-            # pytorch
-            # torchvision
+            (torchvision.override { inherit pytorch; })
 
             ipywidgets
             tqdm
             networkx
             pydot
+            # (optuna.override { inherit tqdm; })
+            # optuna
 
             nltk
             wordcloud
@@ -71,6 +87,7 @@
           ];
           extraPackages = p: [
             (latexBuild p)
+            pkgs.sentencepiece
           ];
           # jupytext?
 
@@ -108,6 +125,10 @@
           jupyterlab = {
             type = "app";
             program = "${jupyterEnvironment}/bin/jupyter-lab";
+          };
+          pythonda = {
+            type = "app";
+            program = "${builtins.head iPython.runtimePackages}/bin/python-Python-env";
           };
           default = jupyterlab;
         };
