@@ -47,8 +47,8 @@
 
             scipy
             scikit-learn
-            pytorch
-            torchvision
+            # pytorch
+            # torchvision
 
             ipywidgets
             tqdm
