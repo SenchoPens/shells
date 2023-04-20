@@ -68,11 +68,11 @@
             tqdm
             networkx
             pydot
+
+            (nltk.override {inherit tqdm; })
+            wordcloud
             # (optuna.override { inherit tqdm; })
             # optuna
-
-            nltk
-            wordcloud
 
             # bokeh
             # holoviews
