@@ -26,7 +26,7 @@
         });
 
         latexShell = pkgs.mkShell {
-          nativeBuildInputs = with pkgs; [ 
+          nativeBuildInputs = [ 
             # biber
             (latexBuild pkgs)
           ];
@@ -49,11 +49,19 @@
             scikit-learn
             pytorch
             torchvision
+            transformers
 
             ipywidgets
             tqdm
             networkx
             pydot
+
+            sentencepiece
+            pymorphy2
+            nltk
+            wordcloud
+
+            catboost
 
             # bokeh
             # holoviews
@@ -95,7 +103,7 @@
           shellHook = a.shellHook + "\n" + v.shellHook;
         }) (pkgs.mkShell {}) envs);
 
-      in rec {
+      in {
         packages = rec {
           jupyterlab = jupyterEnvironment;
           default = jupyterlab;

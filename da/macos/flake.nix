@@ -55,6 +55,9 @@
             networkx
             pydot
 
+            nltk
+            wordcloud
+
             # bokeh
             # holoviews
             # panel
