@@ -47,6 +47,8 @@
 
             scipy
             scikit-learn
+            (callPackage ./metric-learn.nix { })
+            # scikit-learn-extra
             pytorch
             torchvision
             transformers
@@ -62,6 +64,8 @@
             wordcloud
 
             catboost
+            # umap-learn
+            # music21
 
             # bokeh
             # holoviews

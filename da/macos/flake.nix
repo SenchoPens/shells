@@ -48,6 +48,7 @@
 		      inherit (pkgs.darwin) libobjc;
 	      };
               tqdm = callPackage ./tqdm.nix { };
+              metric-learn = callPackage ../metric-learn.nix { };
           in [
             numpy
 
@@ -63,6 +64,7 @@
             scipy
             scikit-learn
             (torchvision.override { inherit pytorch; })
+            metric-learn
 
             ipywidgets
             tqdm
