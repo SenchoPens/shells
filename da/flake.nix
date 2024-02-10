@@ -4,7 +4,7 @@
   inputs = {
       jupyterWith.url = "github:tweag/jupyterWith";
       flake-utils.url = "github:numtide/flake-utils";
-      nixpkgs.url = "github:NixOS/nixpkgs?ref=nixos-22.05";
+      nixpkgs.url = "github:NixOS/nixpkgs?ref=nixos-23.11";
   };
 
   outputs = { self, nixpkgs, jupyterWith, flake-utils }:
@@ -47,11 +47,11 @@
 
             scipy
             scikit-learn
-            (callPackage ./metric-learn.nix { })
+            # (callPackage ./metric-learn.nix { })
             # scikit-learn-extra
-            pytorch
-            torchvision
-            transformers
+            # pytorch
+            # torchvision
+            # transformers
 
             ipywidgets
             tqdm
@@ -61,9 +61,11 @@
             sentencepiece
             pymorphy2
             nltk
-            wordcloud
+            (wordcloud.overrideAttrs (old: { doCheck = false; doInstallCheck = false; }))
 
             catboost
+            imbalanced-learn
+            joblib
             # umap-learn
             # music21
 

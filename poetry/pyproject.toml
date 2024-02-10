@@ -1,0 +1,44 @@
+[tool.poetry]
+name = "poetry2nix"
+version = "0.1.0"
+description = ""
+authors = ["Arseny Chekanov <senya@chekanov.net>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+ipykernel = {extras = ["notebook"], version = "^6.23.1"}
+nbformat = "^5.8.0"
+nbconvert = "^7.4.0"
+# matplotlib = "^3.7.1"
+# numpy = "^1.24.2"
+# pandas = {extras = ["pyarrow"], version = "^2.0.0"}
+# scikit-learn = "^1.2.2"
+# seaborn = "^0.12.2"
+# umap-learn = "^0.5.3"
+# tqdm = {extras = ["notebook"], version = "^4.65.0"}
+# gudhi = "^3.8.0"
+# giotto-tda = "^0.6.0"
+# html2image = "^2.0.3"
+# catboost = "^1.2"
+# wordcloud = "^1.9.3"
+# plotly = "^5.18.0"
+# nltk = "^3.8.1"
+
+[tool.poetry.group.dev.dependencies]
+# # mygeneration = {path = "lib/mygeneration", develop = true}
+# python-lsp-server = "^1.7.1"
+# pylsp-mypy = "^0.6.6"
+# pyflakes = "^3.0.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+# [tool.mypy]
+# plugins = "numpy.typing.mypy_plugin"
+
+[tool.pytest.ini_options]
+addopts = [
+    "--import-mode=importlib",
+]
